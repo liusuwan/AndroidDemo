@@ -1,54 +1,103 @@
 package liusuwan.androiddemo.activity;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import liusuwan.androiddemo.R;
+import liusuwan.androiddemo.model.AppModel;
 
 public class MainActivity extends AppCompatActivity {
+
+
+    @BindView(R.id.recy_appmodel)
+    RecyclerView recyAppModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        ButterKnife.bind(this);
+        initView();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    public void initView() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        recyAppModel.setHasFixedSize(true);
+        recyAppModel.setLayoutManager(new GridLayoutManager(this, 4));
+        AppModelAdapter appModelAdapter = new AppModelAdapter(this, AppModel.getAppModels());
+        recyAppModel.setAdapter(appModelAdapter);
+    }
+
+
+    public class AppModelAdapter extends RecyclerView.Adapter<AppModelAdapter.AppModelViewHolder> {
+        public List<AppModel> appModelList = new ArrayList<>();
+        public Context context;
+
+        public AppModelAdapter(Context context, List<AppModel> appModelList) {
+            this.context = context;
+            this.appModelList = appModelList;
+        }
+
+        @Override
+        public AppModelViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            return new AppModelViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_appmodel, parent, false));
+        }
+
+        @Override
+        public void onBindViewHolder(AppModelViewHolder holder, int position) {
+            AppModel appModel = appModelList.get(position);
+            holder.imgIcon.setImageDrawable(ContextCompat.getDrawable(context, appModel.getIcon()));
+            holder.tvAppName.setText(appModel.getDesc());
+        }
+
+        @Override
+        public int getItemCount() {
+            return appModelList.size();
+        }
+
+        public class AppModelViewHolder extends RecyclerView.ViewHolder {
+            @BindView(R.id.img_icon)
+            public ImageView imgIcon;
+            @BindView(R.id.tv_app_name)
+            public TextView tvAppName;
+
+            public AppModelViewHolder(View itemView) {
+                super(itemView);
+                ButterKnife.bind(this, itemView);
+            }
+        }
     }
 }
