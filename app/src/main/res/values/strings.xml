@@ -2,4 +2,6 @@
     <string name="app_name">AndroidDemo</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_recy_add_recy">RecyAddRecyActivity</string>
+    <string name="title_activity_recy_load">RecyLoadActivity</string>
+    <string name="title_activity_prism">PrismActivity</string>
 </resources>

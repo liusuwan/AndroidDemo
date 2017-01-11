@@ -1,10 +1,15 @@
 package liusuwan.androiddemo.model;
 
+import android.content.Context;
+import android.content.Intent;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import liusuwan.androiddemo.R;
+import liusuwan.androiddemo.activity.PrismActivity;
 import liusuwan.androiddemo.activity.RecyAddRecyActivity;
+import liusuwan.androiddemo.activity.RecyLoadActivity;
 
 /**
  * Created by Jack on 2017-01-09.
@@ -16,22 +21,43 @@ public class AppModel {
     public int icon;
     public Class mClass;
     public String remark;
+    public OnAppStart onAppStart;
 
     public AppModel() {
     }
 
-    public AppModel(String name, String desc, int icon, Class mClass, String remark) {
+
+    public void setOnAppStart(OnAppStart onAppStart) {
+        this.onAppStart = onAppStart;
+    }
+
+    public AppModel(String name, String desc, int icon, Class mClass, String remark, OnAppStart onAppStart) {
         this.name = name;
         this.desc = desc;
         this.icon = icon;
         this.mClass = mClass;
         this.remark = remark;
+        this.onAppStart = onAppStart;
     }
 
     public static List<AppModel> getAppModels() {
+        OnAppStart onAppStart = new OnAppStart() {
+            @Override
+            public void OnAppStart(Context context, Class cls) {
+                    Intent i = new Intent(context, cls);
+                    context.startActivity(i);
+            }
+        };
+
         List<AppModel> appModelList = new ArrayList<>();
-        appModelList.add(new AppModel("RecyAddRecyActivity", "recy里添加recy", R.mipmap.ic_launcher, RecyAddRecyActivity.class, ""));
+        appModelList.add(new AppModel("RecyAddRecyActivity", "recy里添加recy", R.mipmap.ic_launcher, RecyAddRecyActivity.class, "", onAppStart));
+        appModelList.add(new AppModel("RecyLoadActivity", "recy加载", R.mipmap.ic_launcher, RecyLoadActivity.class, "", onAppStart));
+        appModelList.add(new AppModel("PrismActivity", "Prism框架", R.mipmap.ic_launcher, PrismActivity.class, "", onAppStart));
         return appModelList;
+    }
+
+    public static interface OnAppStart {
+        void OnAppStart(Context context, Class cls);
     }
 
 
@@ -75,4 +101,7 @@ public class AppModel {
         this.remark = remark;
     }
 
+    public OnAppStart getOnAppStart() {
+        return onAppStart;
+    }
 }

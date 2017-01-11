@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -88,15 +89,24 @@ public class MainActivity extends AppCompatActivity {
             return appModelList.size();
         }
 
-        public class AppModelViewHolder extends RecyclerView.ViewHolder {
+        public class AppModelViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
             @BindView(R.id.img_icon)
             public ImageView imgIcon;
             @BindView(R.id.tv_app_name)
             public TextView tvAppName;
+            @BindView(R.id.rel_root)
+            public RelativeLayout relRoot;
 
             public AppModelViewHolder(View itemView) {
                 super(itemView);
                 ButterKnife.bind(this, itemView);
+                relRoot.setOnClickListener(this);
+            }
+
+            @Override
+            public void onClick(View view) {
+                AppModel appModel=appModelList.get(getLayoutPosition());
+                appModel.getOnAppStart().OnAppStart(context,appModel.getmClass());
             }
         }
     }
