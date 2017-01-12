@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="liusuwan.androiddemo.activity.RecyAutoFitActivity">
+    tools:context="liusuwan.androiddemo.activity.BluetoothActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -21,37 +21,13 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
+    <ListView
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_scrValue"
-                style="@style/BigTitle" />
-
-            <TextView
-                android:id="@+id/tv_scrValue2"
-                style="@style/BigTitle" />
-
-            <TextView
-                android:id="@+id/tv_state"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recy_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        android:id="@+id/list_bluetooth"
+        android:layout_below="@+id/button_id"></ListView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

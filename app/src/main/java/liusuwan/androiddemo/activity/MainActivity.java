@@ -1,6 +1,7 @@
 package liusuwan.androiddemo.activity;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import liusuwan.androiddemo.R;
+import liusuwan.androiddemo.helper.AccessUtil;
 import liusuwan.androiddemo.model.AppModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initView();
+    }
+
+    @Override
+    protected void onResume() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            AccessUtil.getAccess(MainActivity.this);
+        }
+        super.onResume();
     }
 
     @Override
@@ -61,6 +71,21 @@ public class MainActivity extends AppCompatActivity {
         AppModelAdapter appModelAdapter = new AppModelAdapter(this, AppModel.getAppModels());
         recyAppModel.setAdapter(appModelAdapter);
     }
+
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        doNext(requestCode, grantResults);
+//    }
+//
+//    private void doNext(int requestCode, int[] grantResults) {
+//        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//            BaseApp.loadSetting();
+//        } else {
+//            Toast.makeText(this, "获取权限失败!", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//    }
 
 
     public class AppModelAdapter extends RecyclerView.Adapter<AppModelAdapter.AppModelViewHolder> {
@@ -89,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
             return appModelList.size();
         }
 
-        public class AppModelViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
+        public class AppModelViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             @BindView(R.id.img_icon)
             public ImageView imgIcon;
             @BindView(R.id.tv_app_name)
@@ -105,8 +130,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                AppModel appModel=appModelList.get(getLayoutPosition());
-                appModel.getOnAppStart().OnAppStart(context,appModel.getmClass());
+                AppModel appModel = appModelList.get(getLayoutPosition());
+                appModel.getOnAppStart().OnAppStart(context, appModel.getmClass());
             }
         }
     }

@@ -32,8 +32,11 @@ public class RecyAutoFitActivity extends AppCompatActivity {
     public TextView tvScrValue;
     @BindView(R.id.tv_scrValue2)
     public TextView tvScrValue2;
+    @BindView(R.id.tv_state)
+    TextView tvState;
 
-    public int scrValue=0;
+    public int scrValue = 0;
+    public boolean isJump = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,7 @@ public class RecyAutoFitActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,24 +64,29 @@ public class RecyAutoFitActivity extends AppCompatActivity {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                scrValue+=dx;
+                scrValue += dx;
                 tvScrValue.setText(scrValue + "  " + dy);
             }
+
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+                tvState.setText(newState + "");
+                if (newState == 0) {
+                    LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                    int itemWidth = manager.getChildAt(0).getWidth();
+                    int itemNo = scrValue / itemWidth;
+                    if (isJump) {
+                        isJump = false;
+                    } else {
+                        isJump = true;
+                        recyContent.smoothScrollToPosition(itemNo);
+                    }
+                    //recyContent.smoothScrollToPosition(itemNo);
+                }
             }
         });
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            recyContent.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-                @Override
-                public void onScrollChange(View view, int i, int i1, int i2, int i3) {
-                    tvScrValue2.setText(i + "  " + i1 + "  " + i2 + "  " + i3);
-                }
-            });
-        }
-
 
         recyContent.setRecyclerListener(new RecyclerView.RecyclerListener() {
             @Override

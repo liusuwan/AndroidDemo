@@ -5,4 +5,5 @@
     <string name="title_activity_recy_load">RecyLoadActivity</string>
     <string name="title_activity_prism">PrismActivity</string>
     <string name="title_activity_recy_auto_fit">RecyAutoFitActivity</string>
+    <string name="title_activity_bluetooth">BluetoothActivity</string>
 </resources>

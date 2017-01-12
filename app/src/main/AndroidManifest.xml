@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="liusuwan.androiddemo">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -33,6 +41,10 @@
         <activity
             android:name=".activity.RecyAutoFitActivity"
             android:label="@string/title_activity_recy_auto_fit"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.BluetoothActivity"
+            android:label="@string/title_activity_bluetooth"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

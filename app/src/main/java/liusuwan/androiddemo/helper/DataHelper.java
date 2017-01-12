@@ -34,11 +34,9 @@ public class DataHelper {
 
     public static List<String> getTestData() {
         List<String> itemList = new ArrayList<>();
-        itemList.add("tina");
-        itemList.add("jack");
-        itemList.add("may");
-        itemList.add("nomm");
-        itemList.add("meng");
+        for (int i = 0; i < 100; i++) {
+            itemList.add("i");
+        }
         return itemList;
     }
 }

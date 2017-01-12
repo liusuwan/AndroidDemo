@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import liusuwan.androiddemo.R;
+import liusuwan.androiddemo.activity.BluetoothActivity;
 import liusuwan.androiddemo.activity.PrismActivity;
 import liusuwan.androiddemo.activity.RecyAddRecyActivity;
 import liusuwan.androiddemo.activity.RecyAutoFitActivity;
@@ -55,6 +56,7 @@ public class AppModel {
         appModelList.add(new AppModel("RecyLoadActivity", "recy加载", R.drawable.ic_unity, RecyLoadActivity.class, "", onAppStart));
         appModelList.add(new AppModel("PrismActivity", "Prism框架", R.drawable.ic_unity, PrismActivity.class, "", onAppStart));
         appModelList.add(new AppModel("RecyAutoFitActivity", "AutoFit", R.drawable.ic_unity, RecyAutoFitActivity.class, "", onAppStart));
+        appModelList.add(new AppModel("BluetoothActivity", "蓝牙", R.drawable.ic_unity, BluetoothActivity.class, "", onAppStart));
         return appModelList;
     }
 
