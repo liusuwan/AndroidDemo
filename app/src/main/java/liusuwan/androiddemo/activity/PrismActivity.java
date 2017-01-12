@@ -2,13 +2,10 @@ package liusuwan.androiddemo.activity;
 
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.VectorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -95,8 +92,6 @@ public class PrismActivity extends AppCompatActivity {
     }
 
     public void setDrawColor(int i) {
-        Drawable drawable = ContextCompat.getDrawable(this, R.drawable.ic_unity);
-        drawable.setColorFilter(i, PorterDuff.Mode.SRC_OUT);
-        mImageView.setImageDrawable(drawable);
+        mImageView.setColorFilter(i, PorterDuff.Mode.SRC_IN);
     }
 }

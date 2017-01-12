@@ -9,6 +9,7 @@ import java.util.List;
 import liusuwan.androiddemo.R;
 import liusuwan.androiddemo.activity.PrismActivity;
 import liusuwan.androiddemo.activity.RecyAddRecyActivity;
+import liusuwan.androiddemo.activity.RecyAutoFitActivity;
 import liusuwan.androiddemo.activity.RecyLoadActivity;
 
 /**
@@ -44,15 +45,16 @@ public class AppModel {
         OnAppStart onAppStart = new OnAppStart() {
             @Override
             public void OnAppStart(Context context, Class cls) {
-                    Intent i = new Intent(context, cls);
-                    context.startActivity(i);
+                Intent i = new Intent(context, cls);
+                context.startActivity(i);
             }
         };
 
         List<AppModel> appModelList = new ArrayList<>();
-        appModelList.add(new AppModel("RecyAddRecyActivity", "recy里添加recy", R.mipmap.ic_launcher, RecyAddRecyActivity.class, "", onAppStart));
-        appModelList.add(new AppModel("RecyLoadActivity", "recy加载", R.mipmap.ic_launcher, RecyLoadActivity.class, "", onAppStart));
-        appModelList.add(new AppModel("PrismActivity", "Prism框架", R.mipmap.ic_launcher, PrismActivity.class, "", onAppStart));
+        appModelList.add(new AppModel("RecyAddRecyActivity", "recy里添加recy", R.drawable.ic_unity, RecyAddRecyActivity.class, "", onAppStart));
+        appModelList.add(new AppModel("RecyLoadActivity", "recy加载", R.drawable.ic_unity, RecyLoadActivity.class, "", onAppStart));
+        appModelList.add(new AppModel("PrismActivity", "Prism框架", R.drawable.ic_unity, PrismActivity.class, "", onAppStart));
+        appModelList.add(new AppModel("RecyAutoFitActivity", "AutoFit", R.drawable.ic_unity, RecyAutoFitActivity.class, "", onAppStart));
         return appModelList;
     }
 

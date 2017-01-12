@@ -14,6 +14,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -28,6 +29,10 @@
         <activity
             android:name=".activity.PrismActivity"
             android:label="@string/title_activity_prism"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.RecyAutoFitActivity"
+            android:label="@string/title_activity_recy_auto_fit"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
