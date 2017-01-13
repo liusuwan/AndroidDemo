@@ -8,10 +8,12 @@ import java.util.List;
 
 import liusuwan.androiddemo.R;
 import liusuwan.androiddemo.activity.BluetoothActivity;
+import liusuwan.androiddemo.activity.ChangeAnimaActivity;
 import liusuwan.androiddemo.activity.PrismActivity;
 import liusuwan.androiddemo.activity.RecyAddRecyActivity;
 import liusuwan.androiddemo.activity.RecyAutoFitActivity;
 import liusuwan.androiddemo.activity.RecyLoadActivity;
+import liusuwan.androiddemo.activity.SettingsActivity;
 
 /**
  * Created by Jack on 2017-01-09.
@@ -50,13 +52,14 @@ public class AppModel {
                 context.startActivity(i);
             }
         };
-
         List<AppModel> appModelList = new ArrayList<>();
         appModelList.add(new AppModel("RecyAddRecyActivity", "recy里添加recy", R.drawable.ic_unity, RecyAddRecyActivity.class, "", onAppStart));
         appModelList.add(new AppModel("RecyLoadActivity", "recy加载", R.drawable.ic_unity, RecyLoadActivity.class, "", onAppStart));
         appModelList.add(new AppModel("PrismActivity", "Prism框架", R.drawable.ic_unity, PrismActivity.class, "", onAppStart));
         appModelList.add(new AppModel("RecyAutoFitActivity", "AutoFit", R.drawable.ic_unity, RecyAutoFitActivity.class, "", onAppStart));
         appModelList.add(new AppModel("BluetoothActivity", "蓝牙", R.drawable.ic_unity, BluetoothActivity.class, "", onAppStart));
+        appModelList.add(new AppModel("SettingsActivity", "设置", R.drawable.ic_unity, SettingsActivity.class, "", onAppStart));
+        appModelList.add(new AppModel("ChangeAnimaActivity", "切换动画", R.drawable.ic_unity, ChangeAnimaActivity.class, "", onAppStart));
         return appModelList;
     }
 

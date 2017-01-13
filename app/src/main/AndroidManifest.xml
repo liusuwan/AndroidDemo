@@ -45,6 +45,13 @@
         <activity
             android:name=".activity.BluetoothActivity"
             android:label="@string/title_activity_bluetooth"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:label="@string/title_activity_settings" />
+        <activity
+            android:name=".activity.ChangeAnimaActivity"
+            android:label="@string/title_activity_change_anima"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
