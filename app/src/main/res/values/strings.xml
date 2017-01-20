@@ -80,4 +80,5 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="title_activity_change_anima">ChangeAnimaActivity</string>
+    <string name="title_activity_recy_anim">RecyAnimActivity</string>
 </resources>

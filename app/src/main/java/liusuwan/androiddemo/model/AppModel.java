@@ -11,6 +11,7 @@ import liusuwan.androiddemo.activity.BluetoothActivity;
 import liusuwan.androiddemo.activity.ChangeAnimaActivity;
 import liusuwan.androiddemo.activity.PrismActivity;
 import liusuwan.androiddemo.activity.RecyAddRecyActivity;
+import liusuwan.androiddemo.activity.RecyAnimActivity;
 import liusuwan.androiddemo.activity.RecyAutoFitActivity;
 import liusuwan.androiddemo.activity.RecyLoadActivity;
 import liusuwan.androiddemo.activity.SettingsActivity;
@@ -60,6 +61,7 @@ public class AppModel {
         appModelList.add(new AppModel("BluetoothActivity", "蓝牙", R.drawable.ic_unity, BluetoothActivity.class, "", onAppStart));
         appModelList.add(new AppModel("SettingsActivity", "设置", R.drawable.ic_unity, SettingsActivity.class, "", onAppStart));
         appModelList.add(new AppModel("ChangeAnimaActivity", "切换动画", R.drawable.ic_unity, ChangeAnimaActivity.class, "", onAppStart));
+        appModelList.add(new AppModel("RecyAnimActivity", "Recy加载动画", R.drawable.ic_unity, RecyAnimActivity.class, "", onAppStart));
         return appModelList;
     }
 

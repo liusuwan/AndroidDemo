@@ -52,6 +52,10 @@
         <activity
             android:name=".activity.ChangeAnimaActivity"
             android:label="@string/title_activity_change_anima"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.RecyAnimActivity"
+            android:label="@string/title_activity_recy_anim"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
