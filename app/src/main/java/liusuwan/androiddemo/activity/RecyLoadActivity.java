@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,20 +15,23 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import liusuwan.androiddemo.R;
+import liusuwan.androiddemo.adapter.BaseRecyclerAdapter;
 import liusuwan.androiddemo.helper.DataHelper;
+import liusuwan.androiddemo.usercontrol.RecyclerRefreshLayout;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class RecyLoadActivity extends AppCompatActivity {
 
     @BindView(R.id.recy_content)
     public RecyclerView recyContent;
     @BindView(R.id.swip_content)
-    public SwipeRefreshLayout swipContent;
+    public RecyclerRefreshLayout swipContent;
 
     public DataAdapter dataAdapter;
 
@@ -54,16 +56,25 @@ public class RecyLoadActivity extends AppCompatActivity {
             }
         });
 
-        swipContent.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipContent.setRecyclerView(recyContent);
+        swipContent.setCanLoadMore(true);
+        swipContent.setSuperRefreshLayoutListener(new RecyclerRefreshLayout.SuperRefreshLayoutListener() {
             @Override
-            public void onRefresh() {
+            public void onRefreshing() {
                 getData();
+            }
+
+            @Override
+            public void onLoadMore() {
+                dataAdapter.setState(BaseRecyclerAdapter.STATE_LOAD_MORE, true);
+                loadMore();
             }
         });
 
         recyContent.setHasFixedSize(true);
         recyContent.setLayoutManager(new LinearLayoutManager(this));
-        dataAdapter = new DataAdapter(this, DataHelper.getTestData());
+        dataAdapter = new DataAdapter(this, BaseRecyclerAdapter.ONLY_FOOTER);
+        dataAdapter.addAll(DataHelper.getTestData());
         recyContent.setAdapter(dataAdapter);
         swipContent.setProgressViewOffset(false, 0, 100);
         getData();
@@ -72,41 +83,92 @@ public class RecyLoadActivity extends AppCompatActivity {
     //获取数据
     public void getData() {
         swipContent.setRefreshing(true);
-        dataAdapter.setDataList(DataHelper.getTestData());
-        dataAdapter.notifyDataSetChanged();
-        swipContent.setRefreshing(false);
+        Observable.create(new Observable.OnSubscribe<Boolean>() {
+            @Override
+            public void call(Subscriber<? super Boolean> subscriber) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                subscriber.onNext(true);
+                subscriber.onCompleted();
+            }
+        }).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<Boolean>() {
+            @Override
+            public void onCompleted() {
+                swipContent.onComplete();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                swipContent.onComplete();
+            }
+
+            @Override
+            public void onNext(Boolean aBoolean) {
+                if (aBoolean) {
+                    dataAdapter.clear();
+                    dataAdapter.addAll(DataHelper.getTestData());
+                    dataAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+    }
+
+    public void loadMore() {
+        Observable.create(new Observable.OnSubscribe<Boolean>() {
+            @Override
+            public void call(Subscriber<? super Boolean> subscriber) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                subscriber.onNext(true);
+                subscriber.onCompleted();
+            }
+        }).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<Boolean>() {
+            @Override
+            public void onCompleted() {
+                swipContent.onComplete();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                swipContent.onComplete();
+            }
+
+            @Override
+            public void onNext(Boolean aBoolean) {
+                if (aBoolean) {
+                    dataAdapter.addAll(DataHelper.getTestData());
+                    dataAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+
     }
 
     //适配器
-    public class DataAdapter extends RecyclerView.Adapter<RecyLoadActivity.DataAdapter.DataViewHolder> {
+    public class DataAdapter extends BaseRecyclerAdapter<String> {
 
-        public Context context;
-        public List<String> dataList = new ArrayList<>();
-
-        public void setDataList(List<String> dataList) {
-            this.dataList = dataList;
-        }
-
-        public DataAdapter(Context context, List<String> dataList) {
-            this.context = context;
-            this.dataList = dataList;
-        }
-
-
-        @Override
-        public RecyLoadActivity.DataAdapter.DataViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new RecyLoadActivity.DataAdapter.DataViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_data, parent, false));
+        public DataAdapter(Context context, int mode) {
+            super(context, mode);
         }
 
         @Override
-        public void onBindViewHolder(RecyLoadActivity.DataAdapter.DataViewHolder holder, int position) {
-            holder.imgIcon.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_unity));
-            holder.tvName.setText(dataList.get(position));
+        protected RecyclerView.ViewHolder onCreateDefaultViewHolder(ViewGroup parent, int type) {
+            return new DataViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_data, parent, false));
         }
 
         @Override
-        public int getItemCount() {
-            return dataList.size();
+        protected void onBindDefaultViewHolder(RecyclerView.ViewHolder holder, String item, int position) {
+            DataViewHolder dataViewHolder = (DataViewHolder) holder;
+            dataViewHolder.imgIcon.setImageDrawable(ContextCompat.getDrawable(this.mContext, R.drawable.ic_unity));
+            dataViewHolder.tvName.setText(item);
         }
 
         public class DataViewHolder extends RecyclerView.ViewHolder {

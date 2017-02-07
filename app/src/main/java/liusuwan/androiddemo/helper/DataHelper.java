@@ -34,8 +34,8 @@ public class DataHelper {
 
     public static List<String> getTestData() {
         List<String> itemList = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            itemList.add("i");
+        for (int i = 0; i < 5; i++) {
+            itemList.add(String.valueOf(i));
         }
         return itemList;
     }

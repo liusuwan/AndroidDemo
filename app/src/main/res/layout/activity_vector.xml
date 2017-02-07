@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="liusuwan.androiddemo.activity.RecyLoadActivity">
+    tools:context="liusuwan.androiddemo.activity.VectorActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -21,17 +21,19 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <liusuwan.androiddemo.usercontrol.RecyclerRefreshLayout
-        android:id="@+id/swip_content"
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recy_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-    </liusuwan.androiddemo.usercontrol.RecyclerRefreshLayout>
-
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            app:srcCompat="@drawable/animvector"
+            android:layout_gravity="center"/>
+    </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

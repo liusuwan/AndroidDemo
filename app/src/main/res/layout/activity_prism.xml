@@ -40,7 +40,6 @@
                 android:layout_height="300dp"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/ic_unity" />
-
             <LinearLayout
                 android:id="@+id/lin_patte"
                 android:layout_width="wrap_content"

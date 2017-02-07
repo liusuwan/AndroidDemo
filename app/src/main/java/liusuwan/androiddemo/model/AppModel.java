@@ -9,12 +9,15 @@ import java.util.List;
 import liusuwan.androiddemo.R;
 import liusuwan.androiddemo.activity.BluetoothActivity;
 import liusuwan.androiddemo.activity.ChangeAnimaActivity;
+import liusuwan.androiddemo.activity.FragmentAnimationActivity;
+import liusuwan.androiddemo.activity.MetroViewGroupActivity;
 import liusuwan.androiddemo.activity.PrismActivity;
 import liusuwan.androiddemo.activity.RecyAddRecyActivity;
 import liusuwan.androiddemo.activity.RecyAnimActivity;
 import liusuwan.androiddemo.activity.RecyAutoFitActivity;
 import liusuwan.androiddemo.activity.RecyLoadActivity;
 import liusuwan.androiddemo.activity.SettingsActivity;
+import liusuwan.androiddemo.activity.VectorActivity;
 
 /**
  * Created by Jack on 2017-01-09.
@@ -62,6 +65,9 @@ public class AppModel {
         appModelList.add(new AppModel("SettingsActivity", "设置", R.drawable.ic_unity, SettingsActivity.class, "", onAppStart));
         appModelList.add(new AppModel("ChangeAnimaActivity", "切换动画", R.drawable.ic_unity, ChangeAnimaActivity.class, "", onAppStart));
         appModelList.add(new AppModel("RecyAnimActivity", "Recy加载动画", R.drawable.ic_unity, RecyAnimActivity.class, "", onAppStart));
+        appModelList.add(new AppModel("VectorActivity", "矢量动画", R.drawable.ic_unity, VectorActivity.class, "", onAppStart));
+        appModelList.add(new AppModel("MetroViewGroupActivity", "ViewGroup", R.drawable.ic_unity, MetroViewGroupActivity.class, "", onAppStart));
+        appModelList.add(new AppModel("FragmentAnimationActivity", "ftagment动画", R.drawable.ic_unity, FragmentAnimationActivity.class, "", onAppStart));
         return appModelList;
     }
 
