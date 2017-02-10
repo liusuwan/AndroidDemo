@@ -1,9 +1,10 @@
 package liusuwan.androiddemo.fragment;
 
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import liusuwan.androiddemo.R;
+import liusuwan.androiddemo.animation.DetailTransition;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,9 +39,18 @@ public class ParentFragment extends BaseFragment {
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.addSharedElement(view,"img").add(R.id.frame_root, new ChildFragment(), "child");
-                ft.commit();
+                ChildFragment childFragment = new ChildFragment();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    childFragment.setSharedElementEnterTransition(new DetailTransition());
+                    setExitTransition(new Fade());
+                    childFragment.setEnterTransition(new Fade());
+                    childFragment.setSharedElementReturnTransition(new DetailTransition());
+                }
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .addSharedElement(view, "SE")
+                        .replace(R.id.frame_root, childFragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
     }

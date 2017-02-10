@@ -28,7 +28,6 @@ import liusuwan.androiddemo.model.AppModel;
 
 public class MainActivity extends AppCompatActivity {
 
-
     @BindView(R.id.recy_appmodel)
     RecyclerView recyAppModel;
 

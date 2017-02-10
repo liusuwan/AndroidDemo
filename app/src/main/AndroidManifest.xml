@@ -2,13 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="liusuwan.androiddemo">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -63,7 +66,14 @@
             android:label="@string/title_activity_vector"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.MetroViewGroupActivity" />
-        <activity android:name=".activity.FragmentAnimationActivity"></activity>
+        <activity android:name=".activity.FragmentAnimationActivity" />
+        <activity
+            android:name=".activity.ViewDragActivity"
+            android:label="@string/title_activity_view_drag"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.LottieActivity" />
+        <activity android:name=".activity.DialogActivity" />
+        <activity android:name=".activity.BuildPicActivity"></activity>
     </application>
 
 </manifest>
