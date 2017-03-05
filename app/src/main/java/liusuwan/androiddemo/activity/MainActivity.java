@@ -1,8 +1,10 @@
 package liusuwan.androiddemo.activity;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -16,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,9 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            AccessUtil.getAccess(MainActivity.this);
-        }
+
         super.onResume();
     }
 
@@ -69,22 +70,25 @@ public class MainActivity extends AppCompatActivity {
         recyAppModel.setLayoutManager(new GridLayoutManager(this, 4));
         AppModelAdapter appModelAdapter = new AppModelAdapter(this, AppModel.getAppModels());
         recyAppModel.setAdapter(appModelAdapter);
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            AccessUtil.getAccess(MainActivity.this);
+        }
     }
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        doNext(requestCode, grantResults);
-//    }
-//
-//    private void doNext(int requestCode, int[] grantResults) {
-//        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//            BaseApp.loadSetting();
-//        } else {
-//            Toast.makeText(this, "获取权限失败!", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        doNext(requestCode, grantResults);
+    }
+
+    private void doNext(int requestCode, int[] grantResults) {
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        } else {
+            Toast.makeText(this, "获取权限失败!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+    }
 
 
     public class AppModelAdapter extends RecyclerView.Adapter<AppModelAdapter.AppModelViewHolder> {

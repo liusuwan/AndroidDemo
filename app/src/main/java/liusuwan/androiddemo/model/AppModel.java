@@ -13,14 +13,19 @@ import liusuwan.androiddemo.activity.DialogActivity;
 import liusuwan.androiddemo.activity.FragmentAnimationActivity;
 import liusuwan.androiddemo.activity.LottieActivity;
 import liusuwan.androiddemo.activity.MetroViewGroupActivity;
+import liusuwan.androiddemo.activity.NotifyActivity;
 import liusuwan.androiddemo.activity.PrismActivity;
 import liusuwan.androiddemo.activity.RecyAddRecyActivity;
 import liusuwan.androiddemo.activity.RecyAnimActivity;
 import liusuwan.androiddemo.activity.RecyAutoFitActivity;
 import liusuwan.androiddemo.activity.RecyLoadActivity;
+import liusuwan.androiddemo.activity.ScrollingActivity;
+import liusuwan.androiddemo.activity.SelectPhotoActivity;
 import liusuwan.androiddemo.activity.SettingsActivity;
+import liusuwan.androiddemo.activity.TagActivity;
 import liusuwan.androiddemo.activity.VectorActivity;
 import liusuwan.androiddemo.activity.ViewDragActivity;
+import liusuwan.androiddemo.activity.WindowMangerActivity;
 
 /**
  * Created by Jack on 2017-01-09.
@@ -74,6 +79,11 @@ public class AppModel {
         appModelList.add(new AppModel("ViewDragActivity", "拖拽", R.drawable.ic_unity, ViewDragActivity.class, "", onAppStart));
         appModelList.add(new AppModel("LottieActivity", "Lottie", R.drawable.ic_unity, LottieActivity.class, "", onAppStart));
         appModelList.add(new AppModel("DialogActivity", "弹出窗", R.drawable.ic_unity, DialogActivity.class, "", onAppStart));
+        appModelList.add(new AppModel("TagActivity", "标签控件", R.drawable.ic_unity, TagActivity.class, "", onAppStart));
+        appModelList.add(new AppModel("WindowMangerActivity", "弹出窗", R.drawable.ic_unity, WindowMangerActivity.class, "", onAppStart));
+        appModelList.add(new AppModel("NotifyActivity", "通知", R.drawable.ic_unity, NotifyActivity.class, "", onAppStart));
+        appModelList.add(new AppModel("ScrollingActivity", "滚动activity", R.drawable.ic_unity, ScrollingActivity.class, "", onAppStart));
+        appModelList.add(new AppModel("SelectPhotoActivity", "选择图片", R.drawable.ic_unity, SelectPhotoActivity.class, "", onAppStart));
         return appModelList;
     }
 

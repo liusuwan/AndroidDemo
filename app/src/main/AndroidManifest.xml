@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -73,7 +74,32 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.LottieActivity" />
         <activity android:name=".activity.DialogActivity" />
-        <activity android:name=".activity.BuildPicActivity"></activity>
+        <activity android:name=".activity.BuildPicActivity" />
+        <activity android:name=".activity.TagActivity" />
+        <activity
+            android:name=".activity.Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.MPActivity" />
+        <activity
+            android:name=".activity.WindowMangerActivity"
+            android:label="@string/title_activity_window_manger"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.NotifyActivity" />
+        <activity
+            android:name=".activity.ScrollingActivity"
+            android:label="@string/title_activity_scrolling"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.SelectPhotoActivity"
+            android:label="@string/title_activity_select_photo"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name="me.iwf.photopicker.PhotoPickerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            />
+
+        <activity android:name="me.iwf.photopicker.PhotoPagerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
     </application>
 
 </manifest>
